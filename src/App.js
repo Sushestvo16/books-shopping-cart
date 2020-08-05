@@ -1,26 +1,42 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Main from "./components/Main";
+import Header from "./components/Header";
+import data from "./data.json";
+import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
+import PageRenderer from './components/PageRenderer'
+import Filter from './components/Filter';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      products: data.products,
+      genre: "",
+
+    }
+  }
+  render() {
+    return (
+      <Router>
+        <div className="App">
+         <Header />
+         <Filter />
+          <div>
+          <Main products={this.state.products}/>
+          </div>
+          
+          <Switch>
+            {/* <Route path="/:page" component={PageRenderer} /> */}
+            <Route  path="/" render={()=> <Redirect to="/home"/>} /> 
+            {/* <Route component={() => 404} /> */}
+          </Switch>
+        </div>
+      </Router>
+
   );
+  }
+  
 }
 
 export default App;

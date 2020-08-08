@@ -13,7 +13,41 @@ class App extends React.Component {
     this.state = {
       products: data.products,
       genre: "",
+      sort: ""
 
+    }
+  }
+  sortBook = (event) => {
+    let sort = event.target.value;
+    console.log(event.target.value)
+    this.setState((state) =>({
+      sort: sort,
+      products: this.state.products.slice()
+      .sort( (a,b) => 
+        sort === "lowest" 
+        ? a.price > b.price
+         ? 1 
+         : -1
+        : sort === "highest"
+        ? a.price < b.price
+         ? 1 
+         : -1
+        : a.id < b.id
+        ? 1 
+        : -1
+      )
+
+    }))
+  }
+  filterGenres = (event) => {
+    if (event.target.value === "") {
+      this.setState({
+        genre: event.target.value , products: data.products})
+    } else {
+      this.setState({
+        genre: event.target.value,
+        products: data.products.filter(product=> product.genre.indexOf(event.target.value) >=0)
+      })
     }
   }
   render() {
@@ -21,7 +55,9 @@ class App extends React.Component {
       <Router>
         <div className="App">
          <Header />
-         <Filter />
+         <Filter count={this.state.products.length} genre={this.state.genre}
+          sort={this.state.sort} filterGenres={this.filterGenres}
+          sortBook={this.sortBook}/>
           <div>
           <Main products={this.state.products}/>
           </div>

@@ -1,0 +1,25 @@
+{
+  "products": [
+    {   "id": 1,
+        "name": "1984",
+        "image":"/images/book1.jpg",
+        "genre": "Антиутопия",
+        "price": 19.1,
+        "description": "1984 is a dystopian novella by George Orwell published in 1949, which follows the life of Winston Smith, a low ranking member of 'the Party', who is frustrated by the omnipresent eyes of the party, and its ominous ruler Big Brother.'Big Brother' controls every aspect of people's lives.",
+        "bought": true },
+    {   "id": 2,
+        "name": "Война и Мир",
+        "image":"/images/book2.gif",
+        "genre": "Роман",
+        "price": 15.2,
+        "description": "War and Peace broadly focuses on Napoleon's invasion of Russia in 1812 and follows three of the most well-known characters in literature: Pierre Bezukhov, the illegitimate son of a count who is fighting for his inheritance and yearning for spiritual fulfillment;",
+        "bought": false },
+    {    "id": 3,
+         "name": "Преступление и наказание", 
+         "image":"/images/book3.jpg",
+         "genre": "Драма",
+         "price": 12.5,
+         "description": "Роман написан в 1866 г. и посвящен актуальным вопросам социальной жизни пореформенной России, когда происходила ломка старых патриархально-нравственных устоев и складывались новые буржуазные общественные отношения,основанные на всевластии денег, капитала.",
+         "bought": true }
+  ]
+}

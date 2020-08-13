@@ -5,6 +5,10 @@
   }
   body {
     margin: 0;
+    box-sizing: border-box;
+  }
+  .main__content {
+    display: flex;
   }
   a {
     text-decoration: none;
@@ -14,7 +18,7 @@
     justify-content: flex-around;
   }
   .image_size {
-    margin: 50px 50px;
+    margin-top: 20px;
   }
   .header__link {
     text-decoration: none;
@@ -24,11 +28,11 @@
   }
   .container {
     float: left;
-    margin: 0 50px;
+    margin: 0 30px;
   }
   .wrap__main{
     display: flex;
-    justify-content: space-between;
+    width: 70%;
     flex-wrap: wrap;
   }
   .main_images {
@@ -67,4 +71,61 @@
     align-items: center;
     height: 70px;
   }
-  
+/* cart style */ 
+.cart__wrapper{
+  width: 30%;
+}
+.cart__container {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+}
+.cart__container li {
+  list-style-type: none;
+  margin: 20px 0;
+}
+ .cart__image{
+float: left;
+} 
+.cart__icon{
+  max-width: 90px;
+}
+.cart__name{
+ float: left;
+ margin-top: 5%;
+}  
+.cart__name .primary{
+  margin-top: 10px;
+  height: 30px;
+  width: 100px;
+}
+
+/*Form style  */
+form {
+  width: 100%;
+}
+.form__container {
+  list-style-type: none;
+  width: 100%;
+  padding: 0;
+}
+.form__container li {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+input {
+  padding: 10px;
+  border: .1px solid #c0c0c0;
+}
+
+
+/* Modal style */
+.close__modal {
+  float: right;
+}
+.modal__container{
+  display: flex;
+}
+
+

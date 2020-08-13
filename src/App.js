@@ -2,21 +2,50 @@ import React from 'react';
 import './App.css';
 import Main from "./components/Main";
 import Header from "./components/Header";
-import data from "./data.json";
 import {BrowserRouter as Router, Switch, Route, Redirect} from 'react-router-dom';
 import PageRenderer from './components/PageRenderer'
 import Filter from './components/Filter';
+import Cart from './components/Cart';
+import store from './components/store';
+import { Provider } from 'react-redux';
+
 
 class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      products: data.products,
-      genre: "",
-      sort: ""
+      cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : []
 
     }
   }
+  createOrder = (order) => {
+    alert("Need to save" + order.name);
+  }
+  removeFromCart = (product) => {
+    let cartItems = this.state.cartItems.slice();
+    this.setState({
+      cartItems: cartItems.filter(x=>x.id!==product.id)
+    });
+    localStorage.setItem("cartItem", JSON.stringify(cartItems.filter(x=>x.id!==product.id)));
+  }
+  addToCart = (product) => {
+    let cartItems = this.state.cartItems.slice();
+    let alredyInCart = false;
+    cartItems.forEach((item) => {
+      if (item.id === product.id){
+        item.count++;
+        alredyInCart = true;
+      }
+    });
+    if (!alredyInCart) {
+      cartItems.push({...product, count: 1});
+    }
+    this.setState({
+      cartItems
+    });
+    localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  }
+      
   sortBook = (event) => {
     let sort = event.target.value;
     console.log(event.target.value)
@@ -39,27 +68,28 @@ class App extends React.Component {
 
     }))
   }
-  filterGenres = (event) => {
-    if (event.target.value === "") {
-      this.setState({
-        genre: event.target.value , products: data.products})
-    } else {
-      this.setState({
-        genre: event.target.value,
-        products: data.products.filter(product=> product.genre.indexOf(event.target.value) >=0)
-      })
-    }
-  }
+  // filterGenres = (event) => {
+  //   if (event.target.value === "") {
+  //     this.setState({
+  //       genre: event.target.value , products: data.products})
+  //   } else {
+  //     this.setState({
+  //       genre: event.target.value,
+  //       products: data.products.filter(product=> product.genre.indexOf(event.target.value) >=0)
+  //     })
+  //   }
+  // }
   render() {
     return (
+      <Provider store={store}>
       <Router>
         <div className="App">
          <Header />
-         <Filter count={this.state.products.length} genre={this.state.genre}
-          sort={this.state.sort} filterGenres={this.filterGenres}
-          sortBook={this.sortBook}/>
-          <div>
-          <Main products={this.state.products}/>
+         <Filter />
+          <div className="main__content">
+          
+          <Main addToCart={this.addToCart}/>
+          <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart} createOrder={this.createOrder} />
           </div>
           
           <Switch>
@@ -69,10 +99,9 @@ class App extends React.Component {
           </Switch>
         </div>
       </Router>
-
+    </ Provider>
   );
   }
-  
 }
-
+  
 export default App;

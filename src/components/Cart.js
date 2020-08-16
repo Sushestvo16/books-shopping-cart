@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import formatCurrency from '../util';
 import Fade from 'react-reveal/Fade';
+import {connect} from 'react-redux';
+import {removeFromCart} from '../actions/cartActions';
 
-export default class Cart extends Component {
+ class Cart extends Component {
     constructor() {
         super();
         this.state={
@@ -28,10 +30,8 @@ export default class Cart extends Component {
     }
     render() {
         const {cartItems} = this.props;
-        return (
-            
+        return (        
             <div className="cart__wrapper">
-                 {console.log(cartItems.length)}
                 {cartItems.length === 0 ? (<div>Cart is Empty</div> ) 
                 : (<div> You have {cartItems.length} in the  cart</div>) } 
                <div>
@@ -101,3 +101,10 @@ export default class Cart extends Component {
         
     }
 }
+
+export default connect (
+    (state)=> ({
+    cartItems: state.cartPage.cartItems,
+}),
+    {removeFromCart}
+)(Cart);

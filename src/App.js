@@ -11,40 +11,33 @@ import { Provider } from 'react-redux';
 
 
 class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      cartItems: localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : []
-
-    }
-  }
-  createOrder = (order) => {
-    alert("Need to save" + order.name);
-  }
-  removeFromCart = (product) => {
-    let cartItems = this.state.cartItems.slice();
-    this.setState({
-      cartItems: cartItems.filter(x=>x.id!==product.id)
-    });
-    localStorage.setItem("cartItem", JSON.stringify(cartItems.filter(x=>x.id!==product.id)));
-  }
-  addToCart = (product) => {
-    let cartItems = this.state.cartItems.slice();
-    let alredyInCart = false;
-    cartItems.forEach((item) => {
-      if (item.id === product.id){
-        item.count++;
-        alredyInCart = true;
-      }
-    });
-    if (!alredyInCart) {
-      cartItems.push({...product, count: 1});
-    }
-    this.setState({
-      cartItems
-    });
-    localStorage.setItem("cartItems", JSON.stringify(cartItems));
-  }
+  // createOrder = (order) => {
+  //   alert("Need to save" + order.name);
+  // }
+  // removeFromCart = (product) => {
+  //   let cartItems = this.state.cartItems.slice();
+  //   this.setState({
+  //     cartItems: cartItems.filter(x=>x.id!==product.id)
+  //   });
+  //   localStorage.setItem("cartItem", JSON.stringify(cartItems.filter(x=>x.id!==product.id)));
+  // }
+  // addToCart = (product) => {
+  //   let cartItems = this.state.cartItems.slice();
+  //   let alredyInCart = false;
+  //   cartItems.forEach((item) => {
+  //     if (item.id === product.id){
+  //       item.count++;
+  //       alredyInCart = true;
+  //     }
+  //   });
+  //   if (!alredyInCart) {
+  //     cartItems.push({...product, count: 1});
+  //   }
+  //   this.setState({
+  //     cartItems
+  //   });
+  //   localStorage.setItem("cartItems", JSON.stringify(cartItems));
+  // }
       
   // sortBook = (event) => {
   //   let sort = event.target.value;
@@ -88,8 +81,8 @@ class App extends React.Component {
          <Filter />
           <div className="main__content">
           
-          <Main addToCart={this.addToCart}/>
-          <Cart cartItems={this.state.cartItems} removeFromCart={this.removeFromCart} createOrder={this.createOrder} />
+          <Main />
+          <Cart />
           </div>
           
           <Switch>

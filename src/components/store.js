@@ -1,6 +1,7 @@
 import {createStore, combineReducers, applyMiddleware, compose} from 'redux';
 import bookReducer from '../reducers/bookReducer';
 import thunk from 'redux-thunk';
+import { cartReducer } from '../reducers/CartReducer';
 
 
 // let reducers = combineReducers({
@@ -9,11 +10,12 @@ import thunk from 'redux-thunk';
 
 // });
 
-const composeEnhacer = window.__REDUX_DEVTOOLS_EXTENCION_COMPOSE__ || compose;
+const composeEnhacer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
     combineReducers({
-        bookPage: bookReducer }),
+        bookPage: bookReducer, 
+        cartPage: cartReducer}),
          composeEnhacer(applyMiddleware(thunk))
 );
 

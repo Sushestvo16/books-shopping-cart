@@ -12,7 +12,7 @@ import {filterProducts, sortProducts} from '../actions/productActions';
                  {!this.props.filteredProducts ? <div>...Loading</div>
                 : <div className="filter">
                 <div className="filter-result">
-                    {this.props.filteredProducts.lenght} Books
+                    {this.props.filteredProducts.length} Books
                  </div>
                  <div className="filter-sort">
                     Order <select value={this.props.sort} onChange={(e) => this.props.sortProducts(this.props.filteredProducts, e.target.value)}>
